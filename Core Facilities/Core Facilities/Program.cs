@@ -1,14 +1,39 @@
 ﻿using System;
 using System.IO;
 using System.Runtime;
+using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 using System.Threading;
 
 namespace Core_Facilities
 {
     class Program
     {
+        public class Test
+        {
+            static Test()
+            {
+                
+                try
+                {
+                    throw new ArgumentNullException();
+                }
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+        }
         static void Main(string[] args)
         {
+            try
+            {
+                var test = new Test();
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e);
+            }
             Console.WriteLine("Hello World!");
             //1.Пример обработки исключений любых двух примитивных типов(соответственно должно быть два блока catch + finally)
             FileStream fs = null;
